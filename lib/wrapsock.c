@@ -34,7 +34,7 @@ int Listen(int sockfd, int backlog)
     int rtn = 0;
 
     if ( (rtn = listen(sockfd, backlog)) < 0){
-        printf("listen error");
+        printf("listen error\n");
         exit(0);
     }
 

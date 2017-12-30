@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port        = htons(13);
+    servaddr.sin_port        = htons(MY_DAY_TIME_SERVER_PORT);
 
     Bind(listenfd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
         ticks = time(NULL);
 
-        snprintf(buffer, sizeof(buffer), "%s.24s\n", ctime(&ticks));
+        snprintf(buffer, sizeof(buffer), "MY_DAY_TIME_SERVER:%s.24s\n", ctime(&ticks));
 
         Write(connfd, buffer, strlen(buffer));
 

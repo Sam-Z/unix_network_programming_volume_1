@@ -1,12 +1,4 @@
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<arpa/inet.h>
-
-#include<unistd.h>
-#include<string.h>
-#include<stdio.h>
-#include<stdlib.h>
-
+#include"unp.h"
 #define MAXLINE (256)
 int main(int argc, char **argv)
 {
@@ -27,7 +19,7 @@ int main(int argc, char **argv)
     struct sockaddr_in  addr;
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_port   = htons(13);
+    addr.sin_port   = htons(MY_DAY_TIME_SERVER_PORT);
     if (inet_pton(AF_INET, argv[1], &addr.sin_addr) < 0){
         printf("inet_pton error for %s\n", argv[1]);
         exit(0); 

@@ -13,6 +13,7 @@
 
 #define MAXLINE (256)
 #define LISTENQ (1024)
+#define MY_DAY_TIME_SERVER_PORT (45000)
 
 int Socket(int family, int type, int protocol);
 int Bind(int sockfd, const struct sockaddr *addr, socklen_t  addrlen);
