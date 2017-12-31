@@ -1,17 +1,17 @@
 #include"unp.h"
-#define MAXLINE (256)
+
 int main(int argc, char **argv)
 {
     // 1. 参数校验
     if (argc != 2){
-        printf("usage: a.out <IPaddress>\n");
+        err_quit("usage: a.out <IPaddress>\n");
         exit(0);
     }
 
     // 2. 建立socket
     int sockfd = 0;
     if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
-        printf("socket error!\n");
+        err_sys("socket error!\n");
         exit(0);
     }
 
@@ -21,11 +21,11 @@ int main(int argc, char **argv)
     addr.sin_family = AF_INET;
     addr.sin_port   = htons(MY_DAY_TIME_SERVER_PORT);
     if (inet_pton(AF_INET, argv[1], &addr.sin_addr) < 0){
-        printf("inet_pton error for %s\n", argv[1]);
+        err_quit("inet_pton error for %s\n", argv[1]);
         exit(0); 
     }
     if ( connect(sockfd, (struct sockaddr *) &addr, sizeof(addr)) < 0){
-        printf("connect error!\n");
+        err_sys("connect error!\n");
         exit(0); 
     }
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     }
 
     if (n<0){
-        printf("read error!\n");
+        err_sys("read error!\n");
     }
 
     exit(0);

@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <errno.h>
 #define MAXLINE (256)
 #define LISTENQ (1024)
 #define MY_DAY_TIME_SERVER_PORT (45000)
@@ -21,5 +21,11 @@ int Listen(int sockfd, int backlog);
 int Accept(int sockfd, struct sockaddr *addr, socklen_t *len);
 int Write(int sockfd, char *buffer, int len);
 int Close(int sockfd);
+
+void err_ret(const char *fmt,...);
+void err_sys(const char *fmt,...);
+void err_dump(const char *fmt,...);
+void err_msg(const char  *fmt, ...);
+void err_quit(const char *fmt, ...);
 
 #endif
